@@ -22,6 +22,18 @@
         </header>
 
         <form id="recruitmentForm">
+            <!-- Introduction Box -->
+            <div class="info-box">
+                <h3>Avant de commencer...</h3>
+                <p>Ce formulaire nous permet de mieux connaître votre parcours et vos motivations pour rejoindre
+                    l'équipe Réussite®. Il s'agit d'une étape essentielle de notre processus de recrutement.</p>
+                <div class="important-note">
+                    <p><strong>⚠️ Important :</strong> À la fin de ce questionnaire, il vous sera demandé de
+                        <strong>téléverser votre CV au format PDF</strong>. Veuillez le préparer dès maintenant pour
+                        finaliser votre candidature.</p>
+                </div>
+            </div>
+
             <!-- Stepper Progress Bar -->
             <div class="stepper">
                 <div class="step-indicator active" data-step="1">1</div>
@@ -408,11 +420,15 @@
                             sont conservées pendant une durée maximale de 2 ans. Vous disposez d'un droit d'accès, de
                             rectification et de suppression via dpo@reussite-coaching.com.</p>
                     </div>
+                    <div class="form-group"
+                        style="margin-top: 20px; padding: 20px; border: 2px dashed #EEE; border-radius: 8px; background: #fafafa;">
+                        <label for="cv" style="font-size: 1.1rem; color: var(--secondary-color);">Transmettre mon CV
+                            (PDF uniquement) *</label>
+                        <input type="file" id="cv" name="cv" accept=".pdf" required style="margin-top: 10px;">
+                    </div>
                     <div class="form-group">
-                        <p><strong>Important :</strong> Cliquez sur Envoyer ci-dessous, puis <strong>transmettez
-                                impérativement votre CV</strong> à <a
-                                href="mailto:recrutement@reussite-coaching.com">recrutement@reussite-coaching.com</a>
-                        </p>
+                        <p><strong>Important :</strong> Une fois le formulaire envoyé, votre candidature sera étudiée
+                            par notre équipe sous 48h.</p>
                     </div>
                     <div class="step-nav">
                         <button type="button" class="btn btn-prev" onclick="prevStep(5)">Précédent</button>

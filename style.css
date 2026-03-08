@@ -15,6 +15,34 @@
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.info-box {
+    background: #f8f9fa;
+    border-left: 5px solid var(--primary-color);
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-sm);
+}
+
+.info-box h3 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.important-note {
+    background: rgba(217, 83, 79, 0.05);
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 15px;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.important-note p {
+    margin-bottom: 0;
+}
+
 .stepper {
     display: flex;
     justify-content: space-between;

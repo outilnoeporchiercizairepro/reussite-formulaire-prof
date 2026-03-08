@@ -84,6 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Original Event Listeners ---
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -91,20 +98,37 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
             const data = {};
 
-            // Process FormData to handle multiple values for same name (checkboxes)
-            formData.forEach((value, key) => {
-                if (data[key]) {
-                    if (!Array.isArray(data[key])) {
-                        data[key] = [data[key]];
+            // Show loading state if desired
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Envoi en cours...";
+
+            // Process FormData
+            for (let [key, value] of formData.entries()) {
+                if (value instanceof File) {
+                    if (value.size > 0) {
+                        try {
+                            data[key + '_base64'] = await toBase64(value);
+                            data[key + '_name'] = value.name;
+                            data[key + '_type'] = value.type;
+                        } catch (err) {
+                            console.error("Base64 conversion error", err);
+                        }
                     }
-                    data[key].push(value);
                 } else {
-                    data[key] = value;
+                    if (data[key]) {
+                        if (!Array.isArray(data[key])) {
+                            data[key] = [data[key]];
+                        }
+                        data[key].push(value);
+                    } else {
+                        data[key] = value;
+                    }
                 }
-            });
+            }
 
             try {
-                // Show loading state if desired, but here we just go
                 const response = await fetch('https://n8n.prcz.fr/webhook-test/reussite-form', {
                     method: 'POST',
                     headers: {
@@ -121,6 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error('Error submitting form:', error);
                 alert("Une erreur de réseau est survenue. Veuillez vérifier votre connexion.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalBtnText;
             }
         } else {
             form.reportValidity();
