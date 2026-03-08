@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 // We send formData directly as multipart/form-data
                 // Browser automatically sets the correct Content-Type with boundary
-                const response = await fetch('https://n8n.prcz.fr/webhook-test/reussite-form', {
+                const response = await fetch('https://n8n.prcz.fr/webhook/reussite-form', {
                     method: 'POST',
                     body: formData
                 });
