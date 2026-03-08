@@ -1,0 +1,128 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('recruitmentForm');
+    const telephoneInput = document.getElementById('telephone');
+    const successModal = document.getElementById('successModal');
+
+    // Phone formatting
+    telephoneInput.addEventListener('input', (e) => {
+        let value = e.target.value;
+        if (!value.startsWith('+33')) {
+            e.target.value = '+33' + value.replace(/[^0-9]/g, '');
+        } else {
+            e.target.value = '+33' + value.substring(3).replace(/[^0-9]/g, '');
+        }
+        if (e.target.value.length > 12) {
+            e.target.value = e.target.value.substring(0, 12);
+        }
+    });
+
+    // --- Stepper Logic ---
+    window.nextStep = (currentStep) => {
+        // Validation check for the current step
+        const currentStepEl = document.getElementById(`step${currentStep}`);
+        const inputs = currentStepEl.querySelectorAll('input[required], select[required], textarea[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (!input.checkValidity()) {
+                input.reportValidity();
+                isValid = false;
+            }
+        });
+
+        if (isValid) {
+            // Check radio button groups manually if needed (not captured by reportValidity on individual radio if none selected)
+            const radioGroups = new Set();
+            currentStepEl.querySelectorAll('input[type="radio"][required]').forEach(r => radioGroups.add(r.name));
+            for (let name of radioGroups) {
+                if (!currentStepEl.querySelector(`input[name="${name}"]:checked`)) {
+                    alert('Veuillez sélectionner une option pour continuer.');
+                    isValid = false;
+                    break;
+                }
+            }
+        }
+
+        if (isValid) {
+            goToStep(currentStep + 1);
+        }
+    };
+
+    window.prevStep = (currentStep) => {
+        goToStep(currentStep - 1);
+    };
+
+    function goToStep(stepNumber) {
+        // Update Steps Visibility
+        document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+        document.getElementById(`step${stepNumber}`).classList.add('active');
+
+        // Update Stepper Progress UI
+        const indicators = document.querySelectorAll('.step-indicator');
+        const lines = document.querySelectorAll('.step-line');
+
+        indicators.forEach((ind, index) => {
+            const stepNum = index + 1;
+            ind.classList.remove('active', 'completed');
+            if (stepNum === stepNumber) {
+                ind.classList.add('active');
+            } else if (stepNum < stepNumber) {
+                ind.classList.add('completed');
+            }
+        });
+
+        lines.forEach((line, index) => {
+            const lineNum = index + 1;
+            line.classList.remove('completed');
+            if (lineNum < stepNumber) {
+                line.classList.add('completed');
+            }
+        });
+
+        // Scroll to top of form
+        document.querySelector('.hero').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // --- Original Event Listeners ---
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (form.checkValidity()) {
+            successModal.style.display = 'flex';
+        } else {
+            form.reportValidity();
+        }
+    });
+
+    // Checkboxes & Radios feedback
+    document.querySelectorAll('.checkbox-item input').forEach(cb => {
+        cb.addEventListener('change', () => {
+            const parent = cb.parentElement;
+            if (cb.type === 'radio') {
+                const name = cb.name;
+                document.querySelectorAll(`input[name="${name}"]`).forEach(peer => {
+                    peer.parentElement.style.borderColor = 'transparent';
+                    peer.parentElement.style.background = '#F9F9F9';
+                });
+            }
+            if (cb.checked) {
+                parent.style.borderColor = 'var(--primary-color)';
+                parent.style.background = 'rgba(217, 83, 79, 0.05)';
+            } else {
+                parent.style.borderColor = 'transparent';
+                parent.style.background = '#F9F9F9';
+            }
+        });
+    });
+
+    document.querySelectorAll('.teaching-table input').forEach(input => {
+        input.addEventListener('change', () => {
+            const row = input.closest('tr');
+            if (input.checked) {
+                row.style.background = 'rgba(217, 83, 79, 0.02)';
+            } else {
+                const isAnyChecked = Array.from(row.querySelectorAll('input')).some(i => i.checked);
+                if (!isAnyChecked) { row.style.background = 'transparent'; }
+            }
+        });
+    });
+});

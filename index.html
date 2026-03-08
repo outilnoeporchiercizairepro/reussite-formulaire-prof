@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire candidat Réussite®</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Section 1 : En-tête -->
+        <header class="hero"
+            style="background: linear-gradient(rgba(60, 66, 85, 0.8), rgba(60, 66, 85, 0.8)), url('reussite_recruitment_hero_1772816516368.png') no-repeat center center; background-size: cover;">
+            <h1>Formulaire candidat Réussite®</h1>
+            <p>Bienvenue au questionnaire de pré-recrutement de l'équipe enseignante/formatrice de Réussite®. En
+                choisissant de candidater chez nous, vous risquez de devenir passionné(e) !</p>
+        </header>
+
+        <form id="recruitmentForm">
+            <!-- Stepper Progress Bar -->
+            <div class="stepper">
+                <div class="step-indicator active" data-step="1">1</div>
+                <div class="step-line"></div>
+                <div class="step-indicator" data-step="2">2</div>
+                <div class="step-line"></div>
+                <div class="step-indicator" data-step="3">3</div>
+                <div class="step-line"></div>
+                <div class="step-indicator" data-step="4">4</div>
+                <div class="step-line"></div>
+                <div class="step-indicator" data-step="5">5</div>
+            </div>
+
+            <!-- Step 1: Identité -->
+            <div class="form-step active" id="step1">
+                <section id="infos-candidat">
+                    <h2>Étape 1 : Votre Identité</h2>
+                    <div class="form-group">
+                        <label for="email">Adresse e-mail (Obligatoire) *</label>
+                        <input type="email" id="email" name="email" placeholder="votre@email.com" required>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="nom">Nom</label>
+                            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="adresse">Adresse postale</label>
+                        <input type="text" id="adresse" name="adresse" placeholder="Numéro et nom de rue" required>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label for="cp">Code postal</label>
+                            <input type="text" id="cp" name="cp" placeholder="34000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ville">Ville</label>
+                            <input type="text" id="ville" name="ville" placeholder="Montpellier" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Téléphone (Format +33 sans espace)</label>
+                        <input type="tel" id="telephone" name="telephone" placeholder="+33612345678"
+                            pattern="^\+33[1-9][0-9]{8}$" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Comment sommes-nous entrés en contact ?</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="radio" name="contact"
+                                    value="Candidature spontanée" required> Candidature spontanée</label>
+                            <label class="checkbox-item"><input type="radio" name="contact" value="Salon TAF"> Salon
+                                TAF</label>
+                            <label class="checkbox-item"><input type="radio" name="contact" value="Superprof">
+                                Superprof</label>
+                            <label class="checkbox-item"><input type="radio" name="contact" value="France Travail">
+                                France Travail</label>
+                            <label class="checkbox-item"><input type="radio" name="contact" value="LeBonCoin">
+                                LeBonCoin</label>
+                            <label class="checkbox-item"><input type="radio" name="contact" value="Indeed">
+                                Indeed</label>
+                            <label class="checkbox-item"><input type="radio" name="contact" value="Autre site"> Autre
+                                site (LinkedIn, FB)</label>
+                            <label class="checkbox-item"><input type="radio" name="contact" value="Recommandation">
+                                Recommandation</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="activite">Quelle est votre activité actuelle ?</label>
+                        <input type="text" id="activite" name="activite"
+                            placeholder="Etudiant, Enseignant, Indépendant..." required>
+                    </div>
+                </section>
+                <div class="step-nav">
+                    <button type="button" class="btn btn-next" onclick="nextStep(1)">Suivant</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Secteurs Géographiques -->
+            <div class="form-step" id="step2">
+                <section id="secteur-herault">
+                    <h2>Étape 2 : Secteur Hérault (34)</h2>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Mauguio"> Mauguio et
+                            alentours</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Lunel"> Lunel et
+                            alentours</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Littoral"> Zone
+                            littorale</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Castries"> Castries et
+                            alentours</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Castelnau">
+                            Castelnau-le-Lez...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Mtp Agglo">
+                            Montpellier, agglomération</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="St Mathieu"> St
+                            Mathieu de Tréviers...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="St Gély"> St Gély du
+                            Fesc...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="St Drézéry"> St
+                            Drézéry...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Mtp Ouest">
+                            Montpellier Ouest</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Pignan">
+                            Pignan...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Clermont"> Clermont
+                            l'Hérault...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Sète"> Secteur Sète,
+                            Mèze...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="herault" value="Biterrois"> Secteur
+                            biterrois</label>
+                    </div>
+                </section>
+                <section id="secteur-gard">
+                    <h2>Secteur Gard (30)</h2>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item"><input type="checkbox" name="gard" value="Nîmes"> Nîmes</label>
+                        <label class="checkbox-item"><input type="checkbox" name="gard" value="Vauvert"> Vauvert - Grau
+                            du Roi</label>
+                        <label class="checkbox-item"><input type="checkbox" name="gard" value="Caveirac"> Caveirac -
+                            Sommières</label>
+                        <label class="checkbox-item"><input type="checkbox" name="gard" value="Bouillargues">
+                            Bouillargues - Remoulins</label>
+                        <label class="checkbox-item"><input type="checkbox" name="gard" value="Uzès"> Uzès - Bagnols sur
+                            Cèze...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="gard" value="Le Vigan"> Le Vigan -
+                            Sauve...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="gard" value="Alès"> Alès - Saint
+                            Ambroix...</label>
+                        <label class="checkbox-item"><input type="checkbox" name="gard" value="St Chaptes"> St Chaptes -
+                            St Mamert...</label>
+                    </div>
+                </section>
+                <div class="step-nav">
+                    <button type="button" class="btn btn-prev" onclick="prevStep(2)">Précédent</button>
+                    <button type="button" class="btn btn-next" onclick="nextStep(2)">Suivant</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Mobilité & Dispo -->
+            <div class="form-step" id="step3">
+                <section id="mobilite">
+                    <h2>Étape 3 : Mobilité et Disponibilités</h2>
+                    <div class="form-group">
+                        <label>Moyen de transport :</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="radio" name="transport" value="Vélo" required>
+                                Vélo</label>
+                            <label class="checkbox-item"><input type="radio" name="transport"
+                                    value="Transports en commun"> Transports en commun</label>
+                            <label class="checkbox-item"><input type="radio" name="transport" value="Voiture/Moto">
+                                Voiture / Moto</label>
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label>Disponible jusqu'à fin année scolaire (début juillet) ?</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item"><input type="radio" name="dispo_juillet" value="Oui"
+                                        required> Oui</label>
+                                <label class="checkbox-item"><input type="radio" name="dispo_juillet" value="Non">
+                                    Non</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Disponible à partir de 16h en semaine ?</label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item"><input type="radio" name="dispo_16h" value="Oui" required>
+                                    Oui</label>
+                                <label class="checkbox-item"><input type="radio" name="dispo_16h" value="Non">
+                                    Non</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Heures par semaine souhaitées :</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="radio" name="heures" value="Jusqu'à 5h" required>
+                                Jusqu'à 5h</label>
+                            <label class="checkbox-item"><input type="radio" name="heures" value="5h à 15h"> De 5h à
+                                15h</label>
+                            <label class="checkbox-item"><input type="radio" name="heures" value="Plus de 15h"> Plus de
+                                15h</label>
+                        </div>
+                    </div>
+                </section>
+                <div class="step-nav">
+                    <button type="button" class="btn btn-prev" onclick="prevStep(3)">Précédent</button>
+                    <button type="button" class="btn btn-next" onclick="nextStep(3)">Suivant</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Enseignements & Spécialités -->
+            <div class="form-step" id="step4">
+                <section id="enseignements">
+                    <h2>Étape 4 : Enseignements et Profil</h2>
+                    <div class="experience-grid">
+                        <table class="teaching-table">
+                            <thead>
+                                <tr>
+                                    <th>Matière</th>
+                                    <th>Primaire</th>
+                                    <th>Collège</th>
+                                    <th>Lycée</th>
+                                    <th>Univ / Prépa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Anglais</td>
+                                    <td><input type="checkbox" name="anglais[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="anglais[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="anglais[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="anglais[]" value="Univ"></td>
+                                </tr>
+                                <tr>
+                                    <td>Allemand</td>
+                                    <td><input type="checkbox" name="allemand[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="allemand[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="allemand[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="allemand[]" value="Univ"></td>
+                                </tr>
+                                <tr>
+                                    <td>Espagnol</td>
+                                    <td><input type="checkbox" name="espagnol[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="espagnol[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="espagnol[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="espagnol[]" value="Univ"></td>
+                                </tr>
+                                <tr>
+                                    <td>Français</td>
+                                    <td><input type="checkbox" name="francais[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="francais[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="francais[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="francais[]" value="Univ"></td>
+                                </tr>
+                                <tr>
+                                    <td>Histoire-Géo</td>
+                                    <td><input type="checkbox" name="histgeo[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="histgeo[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="histgeo[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="histgeo[]" value="Univ"></td>
+                                </tr>
+                                <tr>
+                                    <td>Mathématiques</td>
+                                    <td><input type="checkbox" name="maths[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="maths[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="maths[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="maths[]" value="Univ"></td>
+                                </tr>
+                                <tr>
+                                    <td>Physique-Chimie</td>
+                                    <td><input type="checkbox" name="pc[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="pc[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="pc[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="pc[]" value="Univ"></td>
+                                </tr>
+                                <tr>
+                                    <td>SVT</td>
+                                    <td><input type="checkbox" name="svt[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="svt[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="svt[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="svt[]" value="Univ"></td>
+                                </tr>
+                                <tr>
+                                    <td>Coaching</td>
+                                    <td><input type="checkbox" name="coaching[]" value="Primaire"></td>
+                                    <td><input type="checkbox" name="coaching[]" value="Collège"></td>
+                                    <td><input type="checkbox" name="coaching[]" value="Lycée"></td>
+                                    <td><input type="checkbox" name="coaching[]" value="Univ"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <section id="specialites">
+                    <h2>Spécialités Lycée maîtrisées :</h2>
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="Arts"> Arts</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="HGGSP"> HGGSP</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="HLP"> HLP</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="LLCER"> LLCER</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="NSI"> NSI</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="SI"> SI</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="SES"> SES</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="AMC"> AMC</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="Philosophie">
+                            Philosophie</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="Sc. Scientifique"> Ens.
+                            Scientifique</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spec" value="Aucun"> Aucun / Ne sait
+                            pas</label>
+                    </div>
+                </section>
+                <div class="step-nav">
+                    <button type="button" class="btn btn-prev" onclick="prevStep(4)">Précédent</button>
+                    <button type="button" class="btn btn-next" onclick="nextStep(4)">Suivant</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Motivation & Finalisation -->
+            <div class="form-step" id="step5">
+                <section id="reflection">
+                    <h2>Étape 5 : Vos Réflexions</h2>
+                    <div class="form-group">
+                        <label for="raisons">Quelles sont vos raisons pour donner des cours particuliers ?</label>
+                        <textarea id="raisons" name="raisons" rows="3"
+                            placeholder="Partage de connaissances, besoin financier, goût pour la pédagogie..."
+                            required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="difference">Selon vous, quelle est la différence entre le soutien scolaire et l'aide
+                            aux devoirs ?</label>
+                        <textarea id="difference" name="difference" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="competences">Quelles sont les compétences nécessaires pour ce poste selon vous
+                            ?</label>
+                        <textarea id="competences" name="competences" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="attentes">Que connaissez-vous de Réussite® et quelles sont vos attentes ?</label>
+                        <textarea id="attentes" name="attentes" rows="3" required></textarea>
+                    </div>
+                </section>
+                <section id="profil-fin">
+                    <h2>Expérience et Troubles</h2>
+                    <div class="form-group">
+                        <label>Expérience en cours particuliers :</label>
+                        <div class="experience-grid">
+                            <table class="teaching-table">
+                                <thead>
+                                    <tr>
+                                        <th>Durée</th>
+                                        <th>Ponctuellement</th>
+                                        <th>Régulièrement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Aucune</td>
+                                        <td><input type="radio" name="exp_aucune" value="Ponctuel"></td>
+                                        <td><input type="radio" name="exp_aucune" value="Regulier"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Moins d'un an</td>
+                                        <td><input type="radio" name="exp_1an" value="Ponctuel"></td>
+                                        <td><input type="radio" name="exp_1an" value="Regulier"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>1 à 3 ans</td>
+                                        <td><input type="radio" name="exp_3ans" value="Ponctuel"></td>
+                                        <td><input type="radio" name="exp_3ans" value="Regulier"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Plus de 3 ans</td>
+                                        <td><input type="radio" name="exp_plus3ans" value="Ponctuel"></td>
+                                        <td><input type="radio" name="exp_plus3ans" value="Regulier"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Connaissance des troubles TDA(H), Dys, HP :</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item"><input type="radio" name="troubles" value="Pas connu" required>
+                                Pas connu</label>
+                            <label class="checkbox-item"><input type="radio" name="troubles" value="Entendu parler">
+                                Déjà entendu parler</label>
+                            <label class="checkbox-item"><input type="radio" name="troubles"
+                                    value="Déjà travaillé avec"> Déjà travaillé avec</label>
+                        </div>
+                    </div>
+                </section>
+                <section id="fin">
+                    <div class="form-group gdpr">
+                        <p><strong>Information RGPD :</strong> En soumettant ce formulaire, vous consentez au traitement
+                            de vos données personnelles par Réussite® pour l'étude de votre candidature. Vos données
+                            sont conservées pendant une durée maximale de 2 ans. Vous disposez d'un droit d'accès, de
+                            rectification et de suppression via dpo@reussite-coaching.com.</p>
+                    </div>
+                    <div class="form-group">
+                        <p><strong>Important :</strong> Cliquez sur Envoyer ci-dessous, puis <strong>transmettez
+                                impérativement votre CV</strong> à <a
+                                href="mailto:recrutement@reussite-coaching.com">recrutement@reussite-coaching.com</a>
+                        </p>
+                    </div>
+                    <div class="step-nav">
+                        <button type="button" class="btn btn-prev" onclick="prevStep(5)">Précédent</button>
+                        <button type="submit" class="btn btn-primary" style="margin-top:0; width:auto">Envoyer ma
+                            candidature</button>
+                    </div>
+                </section>
+            </div>
+        </form>
+
+        <footer style="text-align: center; margin-top: 40px; color: var(--text-muted); font-size: 0.9rem;">
+            &copy; 2026 Réussite® - Tous droits réservés
+        </footer>
+    </div>
+
+    <!-- Success Modal (Hidden by default) -->
+    <div id="successModal"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:1000; justify-content:center; align-items:center;">
+        <div style="background:white; padding:40px; border-radius:15px; text-align:center; max-width:500px;">
+            <h2 style="color:var(--primary-color)">Félicitations !</h2>
+            <p>Votre formulaire a été envoyé avec succès.</p>
+            <p style="margin:20px 0;"><strong>N'oubliez pas d'envoyer votre CV à
+                    :</strong><br>recrutement@reussite-coaching.com</p>
+            <button onclick="location.reload()" class="btn btn-primary" style="width:auto">Fermer</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
