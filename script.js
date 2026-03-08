@@ -84,14 +84,123 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Original Event Listeners ---
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
         if (form.checkValidity()) {
-            successModal.style.display = 'flex';
+            const formData = new FormData(form);
+            const data = {};
+
+            // Process FormData to handle multiple values for same name (checkboxes)
+            formData.forEach((value, key) => {
+                if (data[key]) {
+                    if (!Array.isArray(data[key])) {
+                        data[key] = [data[key]];
+                    }
+                    data[key].push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            try {
+                // Show loading state if desired, but here we just go
+                const response = await fetch('https://n8n.prcz.fr/webhook-test/reussite-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    successModal.style.display = 'flex';
+                } else {
+                    alert("Une erreur est survenue lors de l'envoi du formulaire. Veuillez réessayer.");
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert("Une erreur de réseau est survenue. Veuillez vérifier votre connexion.");
+            }
         } else {
             form.reportValidity();
         }
     });
+
+    // --- Test Auto-fill Logic ---
+    window.fillTestData = () => {
+        const dummyData = {
+            'email': 'test.candidat@example.com',
+            'nom': 'Dupont',
+            'prenom': 'Jean',
+            'adresse': '123 Rue de la République',
+            'cp': '34000',
+            'ville': 'Montpellier',
+            'telephone': '+33612345678',
+            'contact': 'Indeed',
+            'activite': 'Étudiant en Master',
+            'herault': ['Mauguio', 'Lunel'],
+            'gard': ['Nîmes'],
+            'transport': 'Voiture/Moto',
+            'dispo_juillet': 'Oui',
+            'dispo_16h': 'Oui',
+            'heures': '5h à 15h',
+            'anglais[]': ['Collège', 'Lycée'],
+            'maths[]': ['Primaire', 'Collège'],
+            'spec': ['AMC', 'Philosophie'],
+            'raisons': 'Je souhaite partager mes connaissances et aider les élèves à progresser.',
+            'difference': 'Le soutien scolaire est un accompagnement global, tandis que l\'aide aux devoirs est plus ponctuelle sur des tâches précises.',
+            'competences': 'Pédagogie, patience, rigueur et empathie.',
+            'attentes': 'Une structure sérieuse et un accompagnement de qualité.',
+            'exp_aucune': 'Ponctuel', // Selection for one of the experience radios
+            'troubles': 'Déjà entendu parler'
+        };
+
+        // Reset all inputs first
+        form.reset();
+        document.querySelectorAll('.checkbox-item').forEach(parent => {
+            parent.style.borderColor = 'transparent';
+            parent.style.background = '#F9F9F9';
+        });
+
+        // Fill text, email, tel, textarea
+        for (const [key, value] of Object.entries(dummyData)) {
+            const elements = form.elements[key];
+            if (elements) {
+                if (elements.nodeName === 'INPUT' || elements.nodeName === 'TEXTAREA') {
+                    if (elements.type === 'radio' || elements.type === 'checkbox') {
+                        // handled later
+                    } else {
+                        elements.value = value;
+                    }
+                } else if (elements instanceof RadioNodeList || elements.length > 0) {
+                    // Handled later
+                }
+            }
+        }
+
+        // Handle specific groups
+        Object.entries(dummyData).forEach(([key, value]) => {
+            if (Array.isArray(value)) {
+                value.forEach(val => {
+                    const cb = form.querySelector(`input[name="${key}"][value="${val}"]`) ||
+                        form.querySelector(`input[name="${key.replace('[]', '')}[]"][value="${val}"]`);
+                    if (cb) cb.checked = true;
+                });
+            } else {
+                const radio = form.querySelector(`input[name="${key}"][value="${value}"]`);
+                if (radio) radio.checked = true;
+            }
+        });
+
+        // Trigger events to update UI and formatters
+        form.querySelectorAll('input, textarea, select').forEach(input => {
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+
+        console.log("Test data filled.");
+    };
 
     // Checkboxes & Radios feedback
     document.querySelectorAll('.checkbox-item input').forEach(cb => {
