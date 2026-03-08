@@ -1,12 +1,12 @@
-FROM node:20-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --legacy-peer-deps
-COPY . .
-RUN npm run build
 
 FROM nginx:alpine
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist /usr/share/nginx/html
+
+# Optionnel mais recommandé pour éviter le cache navigateur en dev:
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY index.html /usr/share/nginx/html/index.html
+COPY script.js /usr/share/nginx/html/script.js
+COPY style.css /usr/share/nginx/html/style.css
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
