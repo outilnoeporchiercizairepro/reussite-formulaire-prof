@@ -168,6 +168,24 @@ body {
     box-shadow: var(--shadow-md);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-logo {
+    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.hero-logo img {
+    height: 60px;
+    width: auto;
+    display: block;
 }
 
 .hero::before {
