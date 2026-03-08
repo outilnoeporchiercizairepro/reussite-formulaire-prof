@@ -84,57 +84,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Original Event Listeners ---
-    const toBase64 = file => new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-    });
-
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
         if (form.checkValidity()) {
             const formData = new FormData(form);
-            const data = {};
 
-            // Show loading state if desired
+            // Show loading state
             const submitBtn = form.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerText;
             submitBtn.disabled = true;
             submitBtn.innerText = "Envoi en cours...";
 
-            // Process FormData
-            for (let [key, value] of formData.entries()) {
-                if (value instanceof File) {
-                    if (value.size > 0) {
-                        try {
-                            data[key + '_base64'] = await toBase64(value);
-                            data[key + '_name'] = value.name;
-                            data[key + '_type'] = value.type;
-                        } catch (err) {
-                            console.error("Base64 conversion error", err);
-                        }
-                    }
-                } else {
-                    if (data[key]) {
-                        if (!Array.isArray(data[key])) {
-                            data[key] = [data[key]];
-                        }
-                        data[key].push(value);
-                    } else {
-                        data[key] = value;
-                    }
-                }
-            }
-
             try {
+                // We send formData directly as multipart/form-data
+                // Browser automatically sets the correct Content-Type with boundary
                 const response = await fetch('https://n8n.prcz.fr/webhook-test/reussite-form', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                    body: formData
                 });
 
                 if (response.ok) {
